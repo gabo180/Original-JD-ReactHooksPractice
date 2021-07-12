@@ -5,8 +5,20 @@ export function Home() {
 	const [inputValue, setInputValue] = useState("");
 	const [userName, setUserName] = useState("");
 	const [showAlert, doShowAlert] = useState(false);
+	const [firstTimeRunning, setFirstTimeRunning] = useState(true);
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		console.log("value for user input has changed", inputValue);
+
+		if (inputValue === "" && firstTimeRunning === false) {
+			console.log("invalid users input");
+			setUserName("");
+			doShowAlert(true);
+		} else {
+			doShowAlert(false);
+		}
+		setFirstTimeRunning(false);
+	}, [inputValue]);
 
 	const updateInfo = e => {
 		let value = e.target.value;
